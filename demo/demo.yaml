@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  Date:
+    Type: String
+Resources:
+  Ssm:
+    Type: Custom::Lambda
+    Properties:
+      ServiceToken: !ImportValue cfn-lambda-ssm-put-parameter:LambdaArn
+      Name: /demo/cfn-lambda/ssm-put-parameter/ssm
+      Type: SecureString
+      # This is a demo. When you use 'SecureString', It should be used in cases such as '!GetAtt AWS::IAM::AccessKey.SecretAccessKey'
+      Value: 'secret'
+      DeployAlways: !Ref Date
